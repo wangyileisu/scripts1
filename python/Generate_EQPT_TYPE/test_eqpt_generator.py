@@ -42,7 +42,7 @@ def test_process_data_generates_correct_output(temp_dir_with_files):
     df_output = pd.read_csv(output_path)
 
     assert 'EQPT_TYPE' in df_output.columns
-    assert list(df_output['EQPT_TYPE']) == ['EXA', 'SS', 'EXA', 'SS', None]
+    assert list(df_output['EQPT_TYPE']) == ['EXA', 'SS', 'EXA', 'SS', np.nan]
 
     # 清理文件
     os.remove(output_path)
