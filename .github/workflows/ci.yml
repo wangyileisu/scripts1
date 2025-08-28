@@ -1,0 +1,29 @@
+name: Python CI for Testing
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'  # 你也可以根据需要修改为其他版本，比如 '3.12'
+          cache: 'pip' # 启用 pip 缓存，可以加快后续运行速度
+
+      - name: Install dependencies from requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r .github/workflows/requirements.txt
+
+      - name: Run tests with pytest
+        run: pytest python/Generate_EQPT_TYPE/
